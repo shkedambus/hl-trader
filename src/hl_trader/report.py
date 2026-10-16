@@ -1,5 +1,3 @@
-"""Russian wording of verdicts for people to read."""
-
 from __future__ import annotations
 
 from collections.abc import Mapping

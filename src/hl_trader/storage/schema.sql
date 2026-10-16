@@ -1,8 +1,3 @@
--- Data model of the MVP. Metrics and verdicts are append-only (NFR-4): comparing an old
--- verdict with what the trader did afterwards is how the selection is checked (FR-20),
--- and that history cannot be rebuilt once overwritten.
-
--- A.1-A.6 parameters, one row per version (FR-8, FR-13).
 CREATE TABLE IF NOT EXISTS methodology_versions (
     version      TEXT PRIMARY KEY,
     parameters   JSONB NOT NULL,
@@ -60,7 +55,6 @@ CREATE TABLE IF NOT EXISTS verdicts (
     confidence          DOUBLE PRECISION NOT NULL,
     style               TEXT NOT NULL,
     contributions       JSONB NOT NULL,
-    -- Every filter and threshold with its actual value; the wording of reasons is built from it.
     checks              JSONB NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_verdicts_latest ON verdicts (address, judged_at DESC);
@@ -90,7 +84,6 @@ CREATE TABLE IF NOT EXISTS events (
 );
 CREATE INDEX IF NOT EXISTS idx_events_address ON events (address, occurred_at);
 
--- Only the chat id is kept about a Telegram user (NFR-7).
 CREATE TABLE IF NOT EXISTS subscriptions (
     chat_id    BIGINT NOT NULL,
     address    TEXT NOT NULL,
@@ -98,7 +91,6 @@ CREATE TABLE IF NOT EXISTS subscriptions (
     PRIMARY KEY (chat_id, address)
 );
 
--- One row per delivered message: the primary key is what makes delivery exactly-once (NFR-6).
 CREATE TABLE IF NOT EXISTS deliveries (
     event_id     BIGINT NOT NULL REFERENCES events (id),
     chat_id      BIGINT NOT NULL,

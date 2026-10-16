@@ -1,8 +1,4 @@
-"""Client for the weighted HyperLiquid info endpoint.
-
-Weights follow
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/rate-limits-and-user-limits
-"""
+# https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/rate-limits-and-user-limits
 
 from __future__ import annotations
 
