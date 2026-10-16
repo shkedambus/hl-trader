@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: hl_trader
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hl_trader}
+      POSTGRES_DB: hl_trader
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
